@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { useI18n } from "@/i18n/I18nProvider";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -77,22 +77,53 @@ function HomePage() {
 
 function Hero() {
   const { t } = useI18n();
-  const [showVideo, setShowVideo] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [allowVideo, setAllowVideo] = useState(false);
+  const [mediaState, setMediaState] = useState<"poster" | "loading" | "playing" | "fallback">(
+    "poster",
+  );
 
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const desktop = window.matchMedia("(min-width: 641px)");
-    const updateMedia = () => setShowVideo(desktop.matches && !reducedMotion.matches);
+    const connection = (
+      navigator as Navigator & {
+        connection?: EventTarget & { saveData?: boolean; effectiveType?: string };
+      }
+    ).connection;
+    const updateMedia = () => {
+      const constrainedConnection =
+        connection?.saveData === true ||
+        ["slow-2g", "2g"].includes(connection?.effectiveType ?? "");
+      const enabled = !reducedMotion.matches && !constrainedConnection;
+      setAllowVideo(enabled);
+      if (!enabled) setMediaState("poster");
+    };
 
     updateMedia();
     reducedMotion.addEventListener("change", updateMedia);
-    desktop.addEventListener("change", updateMedia);
+    connection?.addEventListener("change", updateMedia);
 
     return () => {
       reducedMotion.removeEventListener("change", updateMedia);
-      desktop.removeEventListener("change", updateMedia);
+      connection?.removeEventListener("change", updateMedia);
     };
   }, []);
+
+  useEffect(() => {
+    if (!allowVideo) return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    setMediaState("loading");
+    video.muted = true;
+    video.defaultMuted = true;
+    video.setAttribute("muted", "");
+
+    const playPromise = video.play();
+    if (playPromise) {
+      void playPromise.catch(() => setMediaState("fallback"));
+    }
+  }, [allowVideo]);
 
   return (
     <section className="home-hero relative isolate overflow-hidden">
@@ -102,9 +133,12 @@ function Hero() {
           alt=""
           className="home-hero__poster h-full w-full object-cover"
         />
-        {showVideo && (
+        {allowVideo && (
           <video
-            className="home-hero__video"
+            ref={videoRef}
+            className={`home-hero__video ${mediaState === "playing" ? "is-playing" : ""} ${
+              mediaState === "fallback" ? "media-fallback" : ""
+            }`}
             autoPlay
             muted
             loop
@@ -112,7 +146,10 @@ function Hero() {
             preload="metadata"
             poster="/hero-port-wide.jpg"
             aria-hidden="true"
+            onPlaying={() => setMediaState("playing")}
+            onError={() => setMediaState("fallback")}
           >
+            <source src="/hero-port-wide-mobile.mp4" type="video/mp4" media="(max-width: 640px)" />
             <source src="/hero-port-wide.webm" type="video/webm" />
             <source src="/hero-port-wide.mp4" type="video/mp4" />
           </video>
@@ -120,7 +157,7 @@ function Hero() {
         <div className="home-hero__overlay absolute inset-0" />
       </div>
 
-      <div className="container-x flex min-h-[92svh] flex-col justify-center py-32 md:min-h-[92vh] md:py-40">
+      <div className="container-x flex min-h-screen min-h-[100svh] flex-col justify-center py-32 md:min-h-[92vh] md:py-40">
         <Reveal>
           <p className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.32em] text-gold/90">
             <span className="h-px w-8 bg-gold/60" /> {t("hero.eyebrow")}
@@ -199,6 +236,20 @@ function Intro() {
 function EditorialTradeMap() {
   const { t } = useI18n();
   const uid = useId().replace(/:/g, "");
+  const [saveData, setSaveData] = useState(false);
+
+  useEffect(() => {
+    const connection = (
+      navigator as Navigator & {
+        connection?: EventTarget & { saveData?: boolean };
+      }
+    ).connection;
+    const updatePreference = () => setSaveData(connection?.saveData === true);
+
+    updatePreference();
+    connection?.addEventListener("change", updatePreference);
+    return () => connection?.removeEventListener("change", updatePreference);
+  }, []);
   const regions = [
     { key: "reach.canada", x: 107, y: 104, tx: 82, ty: 88 },
     { key: "reach.europe", x: 257, y: 94, tx: 242, ty: 78 },
@@ -214,7 +265,11 @@ function EditorialTradeMap() {
   ];
 
   return (
-    <div className="editorial-map" role="img" aria-label={t("home.intro.map.alt")}>
+    <div
+      className={`editorial-map ${saveData ? "is-data-saving" : ""}`}
+      role="img"
+      aria-label={t("home.intro.map.alt")}
+    >
       <svg viewBox="0 0 520 250" aria-hidden="true">
         <defs>
           <linearGradient id={`${uid}-map-route`} x1="0" x2="1">

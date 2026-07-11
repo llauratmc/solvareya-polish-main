@@ -55,10 +55,10 @@ export function Header() {
   }, []);
 
   useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
     if (open) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "";
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
     };
   }, [open]);
 
@@ -71,8 +71,12 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled ? "bg-ink-deep/94 backdrop-blur-xl hairline-b" : "bg-ink-deep/45 backdrop-blur-sm"
+      className={`site-header fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        open
+          ? "bg-ink-deep hairline-b"
+          : scrolled
+            ? "bg-ink-deep/94 backdrop-blur-xl hairline-b"
+            : "bg-ink-deep/45 backdrop-blur-sm"
       }`}
     >
       <div className="container-x flex h-20 items-center justify-between gap-5 min-[1150px]:h-22">
@@ -172,8 +176,8 @@ export function Header() {
 
       {open && (
         <div className="min-[1150px]:hidden">
-          <div className="hairline-t bg-ink-deep/95 backdrop-blur-xl">
-            <div className="container-x flex flex-col gap-4 py-6">
+          <div className="site-header__mobile-panel hairline-t overflow-y-auto overscroll-contain bg-ink-deep">
+            <div className="container-x flex flex-col gap-4 py-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))]">
               {MOBILE_NAV.map((n) => (
                 <Link
                   key={n.key}
