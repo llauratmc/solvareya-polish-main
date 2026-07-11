@@ -1,0 +1,21 @@
+{
+  "name": "Solvareya Group Ltd.",
+  "short_name": "Solvareya",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#151f2e",
+  "background_color": "#151f2e",
+  "display": "standalone"
+}
