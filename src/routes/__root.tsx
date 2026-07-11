@@ -15,6 +15,9 @@ import { I18nProvider, useI18n } from "@/i18n/I18nProvider";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import logo from "@/assets/solvareya-logo.png";
+import { SeoSync } from "@/components/SeoSync";
+
+const SITE_URL = "https://www.solvareya.com";
 
 function NotFoundComponent() {
   const { t } = useI18n();
@@ -83,8 +86,8 @@ const orgSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Solvareya Group Ltd.",
-  url: "/",
-  logo,
+  url: SITE_URL,
+  logo: `${SITE_URL}${logo}`,
   email: "info@solvareya.com",
   address: {
     "@type": "PostalAddress",
@@ -96,21 +99,39 @@ const orgSchema = {
   slogan: "Smart Routes. Seamless Trade.",
 };
 
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Solvareya Group Ltd.",
+  url: SITE_URL,
+  inLanguage: ["en", "tr", "ru"],
+  publisher: { "@type": "Organization", name: "Solvareya Group Ltd.", url: SITE_URL },
+};
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { title: "Solvareya Group Ltd. — Smart Routes. Seamless Trade." },
+      { title: "Solvareya Group | International Trade & Sourcing Solutions" },
       {
         name: "description",
         content:
-          "International B2B trade, brokerage and re-export, alternative trade solutions, warehousing and heating equipment sourcing from Türkiye.",
+          "Solvareya Group provides international sourcing, re-export, trade coordination, heating equipment supply and value-added logistics solutions connecting Canada, Türkiye, Europe, CIS and Asia.",
       },
       { name: "theme-color", content: "#0d1224" },
       { property: "og:site_name", content: "Solvareya Group Ltd." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      {
+        name: "twitter:title",
+        content: "Solvareya Group | International Trade & Sourcing Solutions",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "International sourcing, re-export, trade coordination, heating equipment supply and value-added logistics across Canada, Türkiye, Europe, CIS and Asia.",
+      },
       { name: "author", content: "Solvareya Group Ltd." },
     ],
     links: [
@@ -122,16 +143,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap",
       },
-      { rel: "alternate", hrefLang: "en", href: "/" },
-      { rel: "alternate", hrefLang: "tr", href: "/" },
-      { rel: "alternate", hrefLang: "ru", href: "/" },
-      { rel: "alternate", hrefLang: "x-default", href: "/" },
+      { rel: "canonical", href: SITE_URL },
+      { rel: "alternate", hrefLang: "en", href: SITE_URL },
+      { rel: "alternate", hrefLang: "tr", href: SITE_URL },
+      { rel: "alternate", hrefLang: "ru", href: SITE_URL },
+      { rel: "alternate", hrefLang: "x-default", href: SITE_URL },
     ],
     scripts: [
       {
         type: "application/ld+json",
         children: JSON.stringify(orgSchema),
       },
+      { type: "application/ld+json", children: JSON.stringify(websiteSchema) },
     ],
   }),
   shellComponent: RootShell,
@@ -159,6 +182,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <I18nProvider>
+        <SeoSync />
         <Outlet />
       </I18nProvider>
     </QueryClientProvider>

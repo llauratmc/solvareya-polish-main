@@ -7,12 +7,15 @@ export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
       { title: "Privacy Policy — Solvareya Group Ltd." },
-      { name: "description", content: "How Solvareya Group Ltd. handles inquiries and personal data." },
+      {
+        name: "description",
+        content: "How Solvareya Group Ltd. handles inquiries and personal data.",
+      },
       { property: "og:title", content: "Privacy Policy — Solvareya Group Ltd." },
-      { property: "og:url", content: "/privacy" },
+      { property: "og:url", content: "https://www.solvareya.com/privacy" },
       { name: "robots", content: "index,follow" },
     ],
-    links: [{ rel: "canonical", href: "/privacy" }],
+    links: [{ rel: "canonical", href: "https://www.solvareya.com/privacy" }],
   }),
   component: Page,
 });

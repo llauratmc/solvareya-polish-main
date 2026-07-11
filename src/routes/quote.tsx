@@ -17,9 +17,9 @@ export const Route = createFileRoute("/quote")({
       },
       { property: "og:title", content: "Request a Quote — Solvareya" },
       { property: "og:description", content: "Request a quote from Solvareya Group Ltd." },
-      { property: "og:url", content: "/quote" },
+      { property: "og:url", content: "https://www.solvareya.com/quote" },
     ],
-    links: [{ rel: "canonical", href: "/quote" }],
+    links: [{ rel: "canonical", href: "https://www.solvareya.com/quote" }],
   }),
   component: QuotePage,
 });

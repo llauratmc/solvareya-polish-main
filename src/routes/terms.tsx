@@ -7,11 +7,14 @@ export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
       { title: "Terms of Use — Solvareya Group Ltd." },
-      { name: "description", content: "Terms governing the use of the Solvareya Group Ltd. website." },
+      {
+        name: "description",
+        content: "Terms governing the use of the Solvareya Group Ltd. website.",
+      },
       { property: "og:title", content: "Terms of Use — Solvareya Group Ltd." },
-      { property: "og:url", content: "/terms" },
+      { property: "og:url", content: "https://www.solvareya.com/terms" },
     ],
-    links: [{ rel: "canonical", href: "/terms" }],
+    links: [{ rel: "canonical", href: "https://www.solvareya.com/terms" }],
   }),
   component: Page,
 });

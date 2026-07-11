@@ -5,9 +5,9 @@ export const DEFAULT_LOCALE: Locale = "en";
 type Dict = Record<string, string>;
 
 const en: Dict = {
-  "meta.home.title": "Solvareya Group Ltd. — Smart Routes. Seamless Trade.",
+  "meta.home.title": "Solvareya Group | International Trade & Sourcing Solutions",
   "meta.home.desc":
-    "International B2B trade, brokerage and re-export, alternative trade solutions, warehousing and heating equipment sourcing from Türkiye. Ottawa, Canada.",
+    "Solvareya Group provides international sourcing, re-export, trade coordination, heating equipment supply and value-added logistics solutions connecting Canada, Türkiye, Europe, CIS and Asia.",
   "meta.services.title": "Services — Solvareya Group Ltd.",
   "meta.services.desc":
     "Brokerage & re-export, alternative trade solutions and warehousing with value-added services. Compliance-conscious international trade coordination.",
@@ -364,9 +364,9 @@ const en: Dict = {
 };
 
 const tr: Dict = {
-  "meta.home.title": "Solvareya Group Ltd. — Akıllı Rotalar. Kesintisiz Ticaret.",
+  "meta.home.title": "Solvareya Group | Uluslararası Ticaret ve Tedarik Çözümleri",
   "meta.home.desc":
-    "Uluslararası B2B ticaret, brokerlik ve re-export, alternatif ticaret çözümleri, depolama ve Türkiye'den ısıtma ekipmanı tedariki. Ottawa, Kanada.",
+    "Solvareya Group; Kanada, Türkiye, Avrupa, BDT ve Asya arasında uluslararası tedarik, yeniden ihracat, ticaret koordinasyonu, ısıtma ekipmanları ve lojistik çözümleri sunar.",
   "meta.services.title": "Hizmetler — Solvareya Group Ltd.",
   "meta.services.desc":
     "Brokerlik ve re-export, alternatif ticaret çözümleri, katma değerli depolama. Uyum odaklı uluslararası ticaret koordinasyonu.",
@@ -719,9 +719,9 @@ const tr: Dict = {
 };
 
 const ru: Dict = {
-  "meta.home.title": "Solvareya Group Ltd. — Умные маршруты. Бесшовная торговля.",
+  "meta.home.title": "Solvareya Group | Международная торговля и снабжение",
   "meta.home.desc":
-    "Международная B2B-торговля, брокеридж и реэкспорт, альтернативные торговые решения, складская логистика и поставки отопительного оборудования из Турции. Оттава, Канада.",
+    "Solvareya Group предоставляет решения в области международного снабжения, реэкспорта, координации торговли, поставок отопительного оборудования и логистики между Канадой, Турцией, Европой, СНГ и Азией.",
   "meta.services.title": "Услуги — Solvareya Group Ltd.",
   "meta.services.desc":
     "Брокеридж и реэкспорт, альтернативные торговые решения, складские услуги с добавленной стоимостью. Координация международной торговли с учётом требований комплаенса.",

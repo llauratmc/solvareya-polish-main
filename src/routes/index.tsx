@@ -12,21 +12,33 @@ import bosphorusImg from "@/assets/bosphorus.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Solvareya Group | International Trade, Re-Export & Sourcing Solutions" },
+      { title: "Solvareya Group | International Trade & Sourcing Solutions" },
       {
         name: "description",
         content:
-          "Solvareya Group provides tailored international trade, sourcing, brokerage, re-export and value-added logistics solutions connecting Türkiye, Canada, Europe and global markets.",
+          "Solvareya Group provides international sourcing, re-export, trade coordination, heating equipment supply and value-added logistics solutions connecting Canada, Türkiye, Europe, CIS and Asia.",
       },
-      { property: "og:title", content: "Solvareya Group | International Trade & Sourcing" },
+      {
+        property: "og:title",
+        content: "Solvareya Group | International Trade & Sourcing Solutions",
+      },
       {
         property: "og:description",
         content:
-          "Tailored international trade, sourcing, brokerage and re-export solutions between Türkiye, Canada, Europe, the CIS and Asia.",
+          "Solvareya Group provides international sourcing, re-export, trade coordination, heating equipment supply and value-added logistics solutions connecting Canada, Türkiye, Europe, CIS and Asia.",
       },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: "https://www.solvareya.com" },
+      {
+        name: "twitter:title",
+        content: "Solvareya Group | International Trade & Sourcing Solutions",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "International sourcing, re-export, trade coordination, heating equipment supply and value-added logistics across Canada, Türkiye, Europe, CIS and Asia.",
+      },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "https://www.solvareya.com" }],
   }),
   component: HomePage,
 });

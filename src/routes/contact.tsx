@@ -15,9 +15,9 @@ export const Route = createFileRoute("/contact")({
       },
       { property: "og:title", content: "Contact — Solvareya" },
       { property: "og:description", content: "Contact Solvareya Group Ltd." },
-      { property: "og:url", content: "/contact" },
+      { property: "og:url", content: "https://www.solvareya.com/contact" },
     ],
-    links: [{ rel: "canonical", href: "/contact" }],
+    links: [{ rel: "canonical", href: "https://www.solvareya.com/contact" }],
   }),
   component: ContactPage,
 });

@@ -29,9 +29,9 @@ export const Route = createFileRoute("/heating")({
         property: "og:description",
         content: "Wholesale heating equipment from Turkish manufacturers.",
       },
-      { property: "og:url", content: "/heating" },
+      { property: "og:url", content: "https://www.solvareya.com/heating" },
     ],
-    links: [{ rel: "canonical", href: "/heating" }],
+    links: [{ rel: "canonical", href: "https://www.solvareya.com/heating" }],
   }),
   component: HeatingPage,
 });

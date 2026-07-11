@@ -19,9 +19,9 @@ export const Route = createFileRoute("/about")({
       },
       { property: "og:title", content: "About — Solvareya Group Ltd." },
       { property: "og:description", content: "Solvareya's approach to international B2B trade." },
-      { property: "og:url", content: "/about" },
+      { property: "og:url", content: "https://www.solvareya.com/about" },
     ],
-    links: [{ rel: "canonical", href: "/about" }],
+    links: [{ rel: "canonical", href: "https://www.solvareya.com/about" }],
   }),
   component: AboutPage,
 });

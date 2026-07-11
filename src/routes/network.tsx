@@ -20,9 +20,9 @@ export const Route = createFileRoute("/network")({
         property: "og:description",
         content: "International partner network across key trade corridors.",
       },
-      { property: "og:url", content: "/network" },
+      { property: "og:url", content: "https://www.solvareya.com/network" },
     ],
-    links: [{ rel: "canonical", href: "/network" }],
+    links: [{ rel: "canonical", href: "https://www.solvareya.com/network" }],
   }),
   component: NetworkPage,
 });

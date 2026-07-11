@@ -18,7 +18,12 @@ import heroImg from "@/assets/hero-port.jpg";
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  provider: { "@type": "Organization", name: "Solvareya Group Ltd." },
+  url: "https://www.solvareya.com/services",
+  provider: {
+    "@type": "Organization",
+    name: "Solvareya Group Ltd.",
+    url: "https://www.solvareya.com",
+  },
   areaServed: ["CA", "TR", "EU", "CIS", "Asia"],
   serviceType: [
     "Brokerage & Re-Export",
@@ -42,9 +47,9 @@ export const Route = createFileRoute("/services")({
         content:
           "Compliance-conscious international trade services coordinated end-to-end by one team.",
       },
-      { property: "og:url", content: "/services" },
+      { property: "og:url", content: "https://www.solvareya.com/services" },
     ],
-    links: [{ rel: "canonical", href: "/services" }],
+    links: [{ rel: "canonical", href: "https://www.solvareya.com/services" }],
     scripts: [{ type: "application/ld+json", children: JSON.stringify(serviceSchema) }],
   }),
   component: ServicesPage,
